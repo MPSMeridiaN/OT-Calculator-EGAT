@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โปรแกรมคำนวณค่า OT</title>
-    <!-- Tailwind CSS -->
+    <title>โปรแกรมคำนวณค่า OT (Update 2x)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Prompt -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -16,7 +13,6 @@
             font-family: 'Prompt', sans-serif;
             background-color: #f3f4f6;
         }
-        /* Custom Scrollbar for better look */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -41,10 +37,9 @@
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden">
-        <!-- Header -->
         <div class="bg-indigo-600 p-6 text-center relative">
             <h1 class="text-white text-2xl font-bold"><i class="fa-solid fa-calculator mr-2"></i> คำนวณค่าโอที</h1>
-            <p class="text-indigo-200 text-sm mt-1">Overtime Calculator System</p>
+            <p class="text-indigo-200 text-sm mt-1">Overtime Calculator System (EGAT)</p>
             <div class="absolute -bottom-6 left-0 right-0 flex justify-center">
                 <div class="bg-white rounded-full p-2 shadow-md">
                     <div class="bg-indigo-100 rounded-full w-10 h-10 flex items-center justify-center text-indigo-600">
@@ -54,10 +49,8 @@
             </div>
         </div>
 
-        <!-- Content -->
         <div class="p-6 pt-10">
             
-            <!-- Salary Input Section -->
             <div class="mb-6 input-group">
                 <label for="salary" class="block text-gray-700 font-semibold mb-2 text-sm transition-colors">
                     ฐานเงินเดือน (บาท)
@@ -72,23 +65,21 @@
                 </div>
                 <div class="mt-2 text-right">
                     <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                        ค่าแรงต่อชั่วโมง: <span id="hourlyRateDisplay" class="font-bold text-indigo-600">0.00</span> บาท
+                        ค่าแรงต่อชั่วโมง (หาร 210): <span id="hourlyRateDisplay" class="font-bold text-indigo-600">0.00</span> บาท
                     </span>
                 </div>
             </div>
 
             <hr class="border-gray-200 mb-6">
 
-            <!-- OT Inputs Section -->
             <div class="space-y-4">
                 
-                <!-- OT x1 -->
                 <div class="flex items-center justify-between bg-blue-50 p-3 rounded-lg border border-blue-100 hover:shadow-sm transition-shadow">
                     <div class="flex items-center">
                         <div class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs mr-3">1</div>
                         <div>
                             <p class="font-semibold text-gray-800">ทำงานวันหยุด (ในเวลา)</p>
-                            <p class="text-xs text-gray-500">เสาร์-อาทิตย์/วันหยุด (08.00-16.00)</p>
+                            <p class="text-xs text-gray-500">เสาร์-อาทิตย์ (08.00-16.00)</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -99,7 +90,6 @@
                     </div>
                 </div>
 
-                <!-- OT x1.5 -->
                 <div class="flex items-center justify-between bg-orange-50 p-3 rounded-lg border border-orange-100 hover:shadow-sm transition-shadow">
                     <div class="flex items-center">
                         <div class="bg-orange-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs mr-3">1.5</div>
@@ -116,13 +106,28 @@
                     </div>
                 </div>
 
-                <!-- OT x3 -->
+                <div class="flex items-center justify-between bg-purple-50 p-3 rounded-lg border border-purple-100 hover:shadow-sm transition-shadow">
+                    <div class="flex items-center">
+                        <div class="bg-purple-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs mr-3">2</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">วันหยุดราชการตามประกาศ</p>
+                            <p class="text-xs text-gray-500">ปีใหม่, สงกรานต์ ฯลฯ</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="number" id="ot2" placeholder="0" min="0"
+                            class="w-20 text-center border-gray-300 border rounded-md p-1 focus:ring-purple-500 focus:border-purple-500"
+                            oninput="calculateOT()">
+                        <span class="text-sm text-gray-600">ชม.</span>
+                    </div>
+                </div>
+
                 <div class="flex items-center justify-between bg-red-50 p-3 rounded-lg border border-red-100 hover:shadow-sm transition-shadow">
                     <div class="flex items-center">
                         <div class="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs mr-3">3</div>
                         <div>
                             <p class="font-semibold text-gray-800">โอทีวันหยุด (นอกเวลา)</p>
-                            <p class="text-xs text-gray-500">เสาร์-อาทิตย์ ก่อน 08.00 หรือ หลัง 16.00</p>
+                            <p class="text-xs text-gray-500">เสาร์-อาทิตย์ นอกเวลาทำการ</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -135,7 +140,6 @@
 
             </div>
 
-            <!-- Result Section -->
             <div class="mt-8 bg-gray-900 rounded-xl p-5 text-white shadow-lg">
                 <h3 class="text-gray-400 text-sm mb-2 uppercase tracking-wide">สรุปยอดเงินโอที</h3>
                 
@@ -147,6 +151,10 @@
                     <div class="flex justify-between">
                         <span>ยอด OT (1.5 เท่า):</span>
                         <span id="result_ot1_5">0.00 บาท</span>
+                    </div>
+                    <div class="flex justify-between text-purple-300">
+                        <span>ยอด OT (2 เท่า):</span>
+                        <span id="result_ot2">0.00 บาท</span>
                     </div>
                     <div class="flex justify-between">
                         <span>ยอด OT (3 เท่า):</span>
@@ -161,7 +169,6 @@
                 <div class="text-right text-xs text-gray-500 mt-1">บาท</div>
             </div>
 
-            <!-- Buttons -->
             <div class="mt-6 flex space-x-3">
                 <button onclick="clearForm()" class="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium">
                     <i class="fa-solid fa-rotate-left mr-1"></i> ล้างค่า
@@ -172,7 +179,6 @@
     </div>
 
     <script>
-        // Formatter for currency
         const formatter = new Intl.NumberFormat('th-TH', {
             style: 'decimal',
             minimumFractionDigits: 2,
@@ -184,10 +190,10 @@
             const salary = parseFloat(document.getElementById('salary').value) || 0;
             const h_ot1 = parseFloat(document.getElementById('ot1').value) || 0;
             const h_ot1_5 = parseFloat(document.getElementById('ot1_5').value) || 0;
+            const h_ot2 = parseFloat(document.getElementById('ot2').value) || 0;
             const h_ot3 = parseFloat(document.getElementById('ot3').value) || 0;
 
             // Calculate Hourly Rate (Base Salary / 210)
-            // Use 210 as requested (standard for 30 days * 7 hours/day usually, or specifically set by company)
             const hourlyRate = salary > 0 ? salary / 210 : 0;
 
             // Display Hourly Rate
@@ -196,17 +202,18 @@
             // Calculate Each OT Amount
             const am_ot1 = h_ot1 * hourlyRate * 1;
             const am_ot1_5 = h_ot1_5 * hourlyRate * 1.5;
+            const am_ot2 = h_ot2 * hourlyRate * 2;
             const am_ot3 = h_ot3 * hourlyRate * 3;
 
             // Calculate Grand Total
-            const total = am_ot1 + am_ot1_5 + am_ot3;
+            const total = am_ot1 + am_ot1_5 + am_ot2 + am_ot3;
 
             // Update UI
             document.getElementById('result_ot1').textContent = formatter.format(am_ot1) + ' บาท';
             document.getElementById('result_ot1_5').textContent = formatter.format(am_ot1_5) + ' บาท';
+            document.getElementById('result_ot2').textContent = formatter.format(am_ot2) + ' บาท';
             document.getElementById('result_ot3').textContent = formatter.format(am_ot3) + ' บาท';
             
-            // Grand Total Animation
             document.getElementById('grandTotal').textContent = formatter.format(total);
         }
 
@@ -214,8 +221,9 @@
             document.getElementById('salary').value = '';
             document.getElementById('ot1').value = '';
             document.getElementById('ot1_5').value = '';
+            document.getElementById('ot2').value = '';
             document.getElementById('ot3').value = '';
-            calculateOT(); // Reset calculation
+            calculateOT();
         }
     </script>
 </body>
